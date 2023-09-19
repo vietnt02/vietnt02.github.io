@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thượng Thư Đài</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="icon.jpg">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap">
+</head>
+<body>
+    <div class="container">
+        <h1>Tra Cứu Chiến Pháp</h1>
+        <div class="options">
+            <button id="kethua-button" class="active">Chiến Pháp Kế Thừa</button>
+            <button id="sukien-button">Chiến Pháp Sự Kiện</button>
+        </div>        
+        <form id="search-form">
+            <div class="input-group">
+                <div>
+                    <label for="champion-name">Nhập Tên Tướng:</label>
+                    <input type="text" id="champion-name" name="champion-name" placeholder="Tên Tướng">
+                </div>
+                <div>
+                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                </div>
+                <div>
+                    <label for="ability-name">Nhập Tên Chiến Pháp:</label>
+                    <input type="text" id="ability-name" name="ability-name" placeholder="Tên Chiến Pháp">
+                </div>
+            </div>            
+            <div class="input-group">
+                <button type="submit">Tìm Kiếm</button>
+            </div>
+        </form>
+        <div id="search-results">
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+<footer>
+    <p>&copy; iNTV - Server 2.</p>
+</footer>
+</html>
