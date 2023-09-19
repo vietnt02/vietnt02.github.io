@@ -21,6 +21,7 @@ input[type="text"] {
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    margin-right: 10px; /* Thêm margin bên phải để tạo khoảng cách */
 }
 
 button {
@@ -32,6 +33,7 @@ button {
     border-radius: 4px;
     cursor: pointer;
 }
+
 
 #searchResult {
     margin-top: 20px;
