@@ -59,6 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     searchResultsContainer.appendChild(table);
                 } else {
                     searchResultsContainer.textContent = "Không tìm thấy kết quả phù hợp.";
+                    searchResultsContainer.style.textAlign = "center";
                 }
             }
         });
