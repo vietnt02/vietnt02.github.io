@@ -92,7 +92,8 @@ table {
 }
 
 table th, table td {
-    padding: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     text-align: center;
     border: 1px solid #ccc;
 }
