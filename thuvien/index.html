@@ -7,122 +7,120 @@
 </head>
 <body>
     <h1>Thư Viện FTU Fake</h1>
-    <input type="text" id="searchInput" placeholder="Enter keyword">
-    <button id="searchButton">Search</button>
+    <input type="text" id="searchInput" placeholder="Nhập từ khóa">
+    <button id="searchButton">Tìm kiếm</button>
     <span class="spacer">&nbsp;</span>
     <button id="downloadButton" style="display: none;">Tải xuống CSV</button>
     <ul id="resultsList"></ul>
     <div id="loadingMessage" style="display: none;">Đang tìm kiếm...</div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-        const searchInput = document.getElementById('searchInput');
-        const searchButton = document.getElementById('searchButton');
-        const downloadButton = document.getElementById('downloadButton');
-        const resultsList = document.getElementById('resultsList');
-        const loadingMessage = document.getElementById('loadingMessage');
-        let results = [];
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
+            const downloadButton = document.getElementById('downloadButton');
+            const resultsList = document.getElementById('resultsList');
+            const loadingMessage = document.getElementById('loadingMessage');
+            let results = [];
 
-        searchInput.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter') {
-                const keyword = searchInput.value.trim();
+            searchInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    const keyword = searchInput.value.trim();
+
+                    if (keyword) {
+                        showLoadingMessage();
+                        fetchResults(keyword);
+                    }
+                }
+            });
+
+            searchButton.addEventListener('click', () => {
+                const keyword = searchInput.value;
 
                 if (keyword) {
                     showLoadingMessage();
                     fetchResults(keyword);
                 }
-            }
-        });
-
-        searchButton.addEventListener('click', () => {
-            const keyword = searchInput.value;
-
-            if (keyword) {
-                showLoadingMessage();
-                fetchResults(keyword);
-            }
-        });
-
-        downloadButton.addEventListener('click', () => {
-            downloadCSV();
-        });
-
-        function showLoadingMessage() {
-            loadingMessage.style.display = 'block';
-            downloadButton.style.display = 'none';
-        }
-
-        function hideLoadingMessage() {
-            loadingMessage.style.display = 'none';
-        }
-
-        function fetchResults(keyword) {
-            const data = {
-                'SearchBy': [['option', 'all'], ['keyword', keyword]],
-                'FilterBy': []
-            };
-
-            fetch('http://thuvien.ftu.edu.vn:5089/api/Search/1/1000/quick', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                hideLoadingMessage();
-
-                results = data.Data.Results;
-
-                resultsList.innerHTML = '';
-
-                results.forEach(result => {
-                    const listItem = document.createElement('li');
-                    const link = document.createElement('a');
-                    link.href = `http://thuvien.ftu.edu.vn/chi-tiet-tai-lieu/${result.Id},${result.YearPub},${result.NhanDe}`;
-                    link.textContent = `${result.YearPub} - ${result.NhanDe}`;
-                    listItem.appendChild(link);
-                    resultsList.appendChild(listItem);
-                });
-
-                if (results.length > 0) {
-                    downloadButton.style.display = 'block'; // Hiển thị nút tải xuống khi có kết quả
-                } else {
-                    downloadButton.style.display = 'none';
-                }
-            })
-            .catch(error => {
-                hideLoadingMessage();
-                console.error('Error:', error);
             });
-        }
-        
 
-        function downloadCSV() {
-            const csvContent = results.map(result => {
-                const yearPub = decodeURIComponent(result.YearPub);
-                const nhanDe = decodeURIComponent(result.NhanDe);
-                return `${yearPub}, ${nhanDe}`;
-            }).join('\n');
-        
-            // Thêm BOM vào đầu file CSV
-            const csvWithBOM = '\ufeff' + csvContent;
-        
-            const blob = new Blob([csvWithBOM], { type: 'text/csv;charset=utf-8;' });
-            const url = URL.createObjectURL(blob);
-        
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'results.csv';
-        
-            document.body.appendChild(a);
-            a.click();
-        
-            URL.revokeObjectURL(url);
-            document.body.removeChild(a);
-        } 
-    });
+            downloadButton.addEventListener('click', () => {
+                downloadCSV();
+            });
 
+            function showLoadingMessage() {
+                loadingMessage.style.display = 'block';
+                downloadButton.style.display = 'none';
+            }
+
+            function hideLoadingMessage() {
+                loadingMessage.style.display = 'none';
+            }
+
+            function fetchResults(keyword) {
+                const data = {
+                    'SearchBy': [['option', 'all'], ['keyword', keyword]],
+                    'FilterBy': []
+                };
+
+                fetch('https://cors-anywhere.herokuapp.com/http://thuvien.ftu.edu.vn:5089/api/Search/1/1000/quick', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    hideLoadingMessage();
+
+                    results = data.Data.Results;
+
+                    resultsList.innerHTML = '';
+
+                    results.forEach(result => {
+                        const listItem = document.createElement('li');
+                        const link = document.createElement('a');
+                        link.href = `http://thuvien.ftu.edu.vn/chi-tiet-tai-lieu/${result.Id},${result.YearPub},${result.NhanDe}`;
+                        link.textContent = `${result.YearPub} - ${result.NhanDe}`;
+                        listItem.appendChild(link);
+                        resultsList.appendChild(listItem);
+                    });
+
+                    if (results.length > 0) {
+                        downloadButton.style.display = 'block'; // Hiển thị nút tải xuống khi có kết quả
+                    } else {
+                        downloadButton.style.display = 'none';
+                    }
+                })
+                .catch(error => {
+                    hideLoadingMessage();
+                    console.error('Lỗi:', error);
+                });
+            }
+
+            function downloadCSV() {
+                const csvContent = results.map(result => {
+                    const yearPub = decodeURIComponent(result.YearPub);
+                    const nhanDe = decodeURIComponent(result.NhanDe);
+                    return `${yearPub}, ${nhanDe}`;
+                }).join('\n');
+
+                // Thêm BOM vào đầu file CSV
+                const csvWithBOM = '\ufeff' + csvContent;
+
+                const blob = new Blob([csvWithBOM], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'results.csv';
+
+                document.body.appendChild(a);
+                a.click();
+
+                URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            }
+        });
     </script>
 </body>
 </html>
