@@ -115,3 +115,60 @@ footer {
     padding-top: 2px;
     padding-bottom: 2px;
 }
+
+
+/* CSS cho popup container */
+.popup-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Màu nền và độ trong suốt */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Đảm bảo popup hiển thị trên cùng */
+}
+
+/* CSS cho nội dung popup */
+.popup-content {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Đổ bóng */
+    max-width: 80%; /* Chiều rộng tối đa */
+    overflow-y: auto; /* Cho phép cuộn nếu nội dung quá dài */
+    max-height: 80%; /* Chiều cao tối đa */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Đặt nút đóng ở dưới cùng */
+    position: relative; /* Để nút đóng có thể được đặt tương đối */
+    text-align: center;
+    max-width: 60%;
+}
+.popup-content h2 {
+    margin-top: 10px; /* Xóa khoảng cách trên của tiêu đề */
+    margin-bottom: -10px; /* Đặt khoảng cách dưới của tiêu đề */
+}
+
+/* CSS cho nút đóng */
+.close-button {
+    background-color: #f44336; /* Màu nền nút đóng */
+    color: #fff; /* Màu chữ nút đóng */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self:center; /* Đặt nút đóng ở phía dưới cùng bên phải */
+}
+
+/* CSS cho hover nút đóng */
+.close-button:hover {
+    background-color: #d32f2f; /* Màu nền khi hover nút đóng */
+}
+
+table tr:hover {
+    background-color: #f5f5f5; /* Đổi màu nền khi hover */
+    cursor: pointer; /* Biến con trỏ thành dấu vạch đứng khi hover */
+}
