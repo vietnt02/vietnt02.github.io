@@ -1,0 +1,173 @@
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width:auto;
+    margin: 0 auto;
+    padding-top: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    font-size: 30px;
+    color: #333;
+    font-weight: 800;
+    margin-bottom: -5px;
+}
+
+
+.options {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.options button {
+    background-color: #ccc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 0 10px;
+    margin-top: 10px;
+}
+
+.options button.active {
+    background-color: #003f83;
+}
+
+.input-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
+}
+
+.input-group label, .input-group input {
+    margin: 5px 2px;
+}
+
+.input-group input::placeholder {
+    font-family: "Nunito", sans-serif;
+}
+
+
+.input-group input {
+    width: 200px;
+    height: 30px;
+    font-size: 15px;
+}
+
+button {
+    background-color: #003f83;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#search-results {
+    margin-top: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ccc;
+    
+}
+
+table th, table td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width:100%;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+
+/* CSS cho popup container */
+.popup-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Màu nền và độ trong suốt */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Đảm bảo popup hiển thị trên cùng */
+}
+
+/* CSS cho nội dung popup */
+.popup-content {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    max-width: 80%;
+    overflow-y: auto;
+    max-height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    text-align: center;
+    max-width: 60%;
+}
+.popup-content h2 {
+    margin-top: 10px;
+    margin-bottom: -8px;
+}
+
+
+.close-button {
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self:center;
+}
+
+.close-button:hover {
+    background-color: #d32f2f;
+}
+
+table tr:hover {
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
