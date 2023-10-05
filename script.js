@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
             
         } else if (searchType === "sukien") {
             csvFile = "sukien.csv";
-            visibleColumns = ["English", "Vietnamese", "Tactics in English", "Chiến Pháp"];
+            visibleColumns = ["English", "Vietnamese", "Tactics in English", "Chiến Pháp", "Mùa (Global)"];
         }
 
         Papa.parse(csvFile, {
