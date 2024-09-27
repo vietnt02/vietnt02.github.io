@@ -22,13 +22,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let csvFile;
         let visibleColumns;
+        let columnMapping;
+
         if (searchType === "kethua") {
             csvFile = "kethua.csv";
-            visibleColumns = ["English", "Vietnamese", "Tactics in English", "Chiến Pháp"];
-            
+            visibleColumns = ["name_en", "inherit_en", "name_vi", "innate_vi", "inherit_vi"];
+            columnMapping = {
+                "name_en": "English",
+                "inherit_en": "Inherit Tactics",
+                "name_vi": "Vietnamese",
+                "innate_vi": "Chiến Pháp Mang Theo",
+                "inherit_vi": "Chiến Pháp Kế Thừa"
+            };
         } else if (searchType === "sukien") {
             csvFile = "sukien.csv";
-            visibleColumns = ["English", "Vietnamese", "Tactics in English", "Chiến Pháp", "Mùa (Global)"];
+            visibleColumns = ["name_en", "name_vi", "tactics_en", "tactics_vi", "season"];
+            columnMapping = {
+                "name_en": "English",
+                "name_vi": "Vietnamese",
+                "tactics_en": "Tactics",
+                "tactics_vi": "Chiến Pháp",
+                "season": "Mùa (Global)"
+            };
         }
 
         Papa.parse(csvFile, {
@@ -39,8 +54,36 @@ document.addEventListener("DOMContentLoaded", function () {
                 const data = results.data;
 
                 const searchResults = data.filter(row => {
-                    const matchChampionName = championName ? (row.English.toLowerCase().includes(championName) || row.Vietnamese.toLowerCase().includes(championName)) : true;
-                    const matchAbilityName = abilityName ? (row["Tactics in English"].toLowerCase().includes(abilityName) || row["Chiến Pháp"].toLowerCase().includes(abilityName)) : true;
+                    // Điều kiện tìm kiếm khác nhau tùy thuộc vào searchType
+                    let matchChampionName, matchAbilityName;
+        
+                    if (searchType === "kethua") {
+                        // Điều kiện cho tệp kethua.csv
+                        matchChampionName = championName ? 
+                            (
+                                row.name_en.toLowerCase().includes(championName)
+                                || row.name_vi.toLowerCase().includes(championName)
+                            ) : true;
+                        matchAbilityName = abilityName ? 
+                            (
+                                row.inherit_en.toLowerCase().includes(abilityName)
+                                || row.innate_vi.toLowerCase().includes(abilityName)
+                                || row.inherit_vi.toLowerCase().includes(abilityName)
+                            ) : true;
+                    } else if (searchType === "sukien") {
+                        // Điều kiện cho tệp sukien.csv
+                        matchChampionName = championName ? 
+                            (
+                                row.name_en.toLowerCase().includes(championName)
+                                || row.name_vi.toLowerCase().includes(championName)
+                            ) : true;
+                        matchAbilityName = abilityName ? 
+                            (
+                                row.tactics_en.toLowerCase().includes(abilityName)
+                                || row.tactics_vi.toLowerCase().includes(abilityName)
+                            ) : true;
+                    }
+
                     return matchChampionName && matchAbilityName;
                 });
 
@@ -49,9 +92,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (searchResults.length > 0) {
                     const table = document.createElement("table");
                     const headerRow = table.insertRow(0);
-                    visibleColumns.forEach(columnName => {
+                    visibleColumns.forEach(columnKey => {
                         const th = document.createElement("th");
-                        th.textContent = columnName;
+                        th.textContent = columnMapping[columnKey];
                         headerRow.appendChild(th);
                     });
 
@@ -65,11 +108,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         // Thêm sự kiện nhấp vào dòng để hiển thị popup
                         if (searchType === "kethua") {
                             row.addEventListener("click", () => {
-                                showPopup(rowData.mangtheo2, rowData.mangtheo, rowData.kethua, rowData["Chiến Pháp"]);
+                                showPopup(rowData.innate_vi, rowData.innate_detail_vi, rowData.inherit_vi, rowData.inherit_detail_vi);
                             });
                         } else if (searchType === "sukien") {
                             row.addEventListener("click", () => {
-                                showPopup(rowData.mangtheo2,rowData.mangtheo);
+                                showPopup(rowData.tactics_vi,rowData.tactics_detail_vi);
                             });
                         }
                     });
@@ -86,25 +129,33 @@ document.addEventListener("DOMContentLoaded", function () {
     kethuaButton.classList.add("active");
 });
 
-function showPopup(mangtheo2, mangtheo, kethua, chienPhap) {
+function showPopup(innate_vi, innate_detail_vi, inherit_vi, inherit_detail_vi) {
     const popupContainer = document.createElement("div");
     popupContainer.classList.add("popup-container");
 
     const popupContent = document.createElement("div");
     popupContent.classList.add("popup-content");
-    popupContent.innerHTML = `
-        <h2>Thông Tin Chiến Pháp: ${mangtheo2}</h2>
-        <p>${mangtheo}</p>
-    `;
-
-    if (kethua !== undefined) {
-        const kethuaElement = document.createElement("div");
-        kethuaElement.innerHTML = `
-            <h2>Chiến Pháp Kế Thừa: ${chienPhap}</h2>
-            <p>${kethua}</p>
+    
+    let contentHTML;
+    if (inherit_vi !== undefined) {
+        contentHTML = `
+            <h2>Chiến Pháp Mang Theo: ${innate_vi}</h2>
+            <p>${innate_detail_vi}</p>
+            <h2>Chiến Pháp Kế Thừa: ${inherit_vi}</h2>
+            <p>${inherit_detail_vi}</p>
         `;
-        popupContent.appendChild(kethuaElement);
+    } else {
+        contentHTML = `
+            <h2>Chiến Pháp: ${innate_vi}</h2>
+            <p>${innate_detail_vi}</p>
+        `;
     }
+
+    // Thay thế các nội dung trong ngoặc vuông bằng thẻ <strong>
+    contentHTML = contentHTML.replace(/\[([^\]]+)\]/g, '<strong>[$1]</strong>');
+
+    // Gắn nội dung vào popup
+    popupContent.innerHTML = contentHTML;
 
     popupContainer.appendChild(popupContent);
 
@@ -126,4 +177,3 @@ function showPopup(mangtheo2, mangtheo, kethua, chienPhap) {
 
     document.body.appendChild(popupContainer);
 }
-
