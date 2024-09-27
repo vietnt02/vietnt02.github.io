@@ -151,6 +151,10 @@ footer {
     margin-top: 10px;
     margin-bottom: -8px;
 }
+.popup-content h3 {
+    margin-top: 15px;
+    margin-bottom: -5px;
+}
 
 
 .close-button {

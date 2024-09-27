@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             });
                         } else if (searchType === "sukien") {
                             row.addEventListener("click", () => {
-                                showPopup(rowData.tactics_vi,rowData.tactics_detail_vi);
+                                showPopup(rowData.tactics_vi,rowData.tactics_detail_vi,undefined,undefined,rowData.name_vi);
                             });
                         }
                     });
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
     kethuaButton.classList.add("active");
 });
 
-function showPopup(innate_vi, innate_detail_vi, inherit_vi, inherit_detail_vi) {
+function showPopup(innate_vi, innate_detail_vi, inherit_vi, inherit_detail_vi, material) {
     const popupContainer = document.createElement("div");
     popupContainer.classList.add("popup-container");
 
@@ -147,6 +147,7 @@ function showPopup(innate_vi, innate_detail_vi, inherit_vi, inherit_detail_vi) {
     } else {
         contentHTML = `
             <h2>Chiến Pháp: ${innate_vi}</h2>
+            <h3>Nguyên liệu: ${material}</h3>
             <p>${innate_detail_vi}</p>
         `;
     }
