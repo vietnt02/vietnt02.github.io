@@ -105,6 +105,11 @@ table th {
     font-weight: bold;
 }
 
+table tr:hover {
+    background-color: #f5f5f5; /* Màu nền khi hover trên hàng trong bảng ở chế độ sáng */
+    cursor: pointer;
+}
+
 footer {
     background-color: #333;
     color: #fff;
@@ -171,7 +176,218 @@ footer {
     background-color: #d32f2f;
 }
 
-table tr:hover {
-    background-color: #f5f5f5;
+
+
+
+/* CSS cho nút Dark Mode */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
     cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 20px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+body.dark-mode {
+    background-color: #121212; /* Màu nền tối */
+}
+
+body.dark-mode .container {
+    background-color: #1e1e1e; /* Màu nền cho container tối */
+    border: 1px solid #444; /* Đường viền tối */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Đổ bóng sáng hơn */
+}
+
+body.dark-mode h1 {
+    color: #f0f0f0; /* Màu chữ sáng hơn cho dark mode */
+}
+
+body.dark-mode .options {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #1e1e1e; /* Màu nền tối cho phần options */
+}
+
+body.dark-mode .options button {
+    background-color: #555; /* Màu nền cho nút tối */
+    color: #fff; /* Màu chữ sáng */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 0 10px;
+    margin-top: 10px;
+}
+
+body.dark-mode .options button:hover {
+    background-color: #777; /* Màu nền khi hover cho nút */
+}
+
+body.dark-mode .options button.active {
+    background-color: #0056a3; /* Màu nền cho nút đang active */
+}
+
+body.dark-mode .input-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+body.dark-mode .input-group label,
+body.dark-mode .input-group input {
+    margin: 5px 2px;
+    color: #f0f0f0; /* Màu chữ sáng cho label và input */
+}
+
+body.dark-mode .input-group input::placeholder {
+    color: #bbb; /* Màu chữ placeholder sáng hơn */
+}
+
+body.dark-mode .input-group input {
+    width: 200px;
+    height: 30px;
+    font-size: 15px;
+    background-color: #333; /* Màu nền cho input tối */
+    color: #f0f0f0; /* Màu chữ sáng cho input */
+    border: 1px solid #444; /* Đường viền tối cho input */
+}
+
+body.dark-mode .input-group input:focus {
+    border-color: #0056a3; /* Màu viền khi input được focus */
+}
+
+body.dark-mode button {
+    background-color: #0056a3; /* Màu nền cho nút trong dark mode */
+    color: #fff; /* Màu chữ sáng */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+body.dark-mode button:hover {
+    background-color: #0077cc; /* Màu nền khi hover cho nút trong dark mode */
+}
+
+body.dark-mode #search-results {
+    margin-top: 20px;
+}
+
+body.dark-mode table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #444; /* Đường viền tối cho bảng */
+}
+
+body.dark-mode table th, 
+body.dark-mode table td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 1px solid #444; /* Biên ô tối */
+    color: #ffffff; /* Màu chữ sáng */
+}
+
+body.dark-mode table th {
+    font-weight: bold;
+    background-color: #2b2b2b; /* Màu nền tiêu đề bảng tối */
+}
+
+body.dark-mode footer {
+    background-color: #121212; /* Màu nền tối cho footer */
+    color: #fff; /* Màu chữ sáng cho footer */
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+
+body.dark-mode .popup-container {
+    background-color: rgba(0, 0, 0, 0.9); /* Màu nền và độ trong suốt tối hơn */
+}
+
+body.dark-mode .popup-content {
+    background-color: #2a2a2a; /* Màu nền cho nội dung popup tối */
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Đổ bóng sáng hơn */
+    max-width: 80%;
+    overflow-y: auto;
+    max-height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    text-align: center;
+    color: #ffffff;
+}
+
+body.dark-mode .popup-content h2,
+body.dark-mode .popup-content h3 {
+    color: #f0f0f0; /* Màu chữ sáng cho tiêu đề */
+}
+
+body.dark-mode .close-button {
+    background-color: #f44336; /* Màu nền cho nút đóng */
+    color: #fff; /* Màu chữ sáng */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self: center;
+}
+
+body.dark-mode .close-button:hover {
+    background-color: #d32f2f; /* Màu nền khi hover cho nút đóng */
+}
+
+body.dark-mode table tr:hover {
+    background-color: #444; /* Màu nền khi hover trên hàng trong bảng */
+    cursor: pointer;
+}
+body.dark-mode .dark-mode-toggle span {
+    color: #ffffff; /* Màu chữ sáng cho chế độ tối */
 }
