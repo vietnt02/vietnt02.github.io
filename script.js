@@ -178,3 +178,23 @@ function showPopup(innate_vi, innate_detail_vi, inherit_vi, inherit_detail_vi, m
 
     document.body.appendChild(popupContainer);
 }
+document.addEventListener("DOMContentLoaded", function () {
+    const darkModeToggle = document.getElementById("dark-mode-toggle");
+
+    // Kiểm tra nếu người dùng đã bật Dark Mode trước đó
+    if (localStorage.getItem("darkMode") === "enabled") {
+        document.body.classList.add("dark-mode");
+        darkModeToggle.checked = true;
+    }
+
+    // Chuyển đổi Dark Mode khi người dùng nhấn nút
+    darkModeToggle.addEventListener("change", function () {
+        if (darkModeToggle.checked) {
+            document.body.classList.add("dark-mode");
+            localStorage.setItem("darkMode", "enabled");
+        } else {
+            document.body.classList.remove("dark-mode");
+            localStorage.setItem("darkMode", null);
+        }
+    });
+});
