@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thượng Thư Đài</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="icon.jpg">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap">
+</head>
+<body>
+    <!-- Nút chuyển đổi Dark Mode -->
+    <div class="dark-mode-toggle" style="position: absolute; top: 10px; right: 10px;">
+        <label class="switch">
+            <input type="checkbox" id="dark-mode-toggle">
+            <span class="slider round"></span>
+        </label>
+        <span>Dark Mode</span>
+    </div>
+
+    <div class="container">
+        <h1>Tra Cứu Đối Thủ</h1>
+        <h2>PK14003V</h2>
+        <form id="search-form">
+            <div class="input-group">
+                <div>
+                    <label for="champion-name">Nhập Tên Địch:</label>
+                    <input type="text" id="champion-name" name="champion-name" placeholder="Tên Địch hoặc Bang">
+                </div>
+                <div>
+                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                </div>
+                <div>
+                    <label for="ability-name">Nhập Tên Team:</label>
+                    <input type="text" id="ability-name" name="ability-name" placeholder="Tên Team">
+                </div>
+            </div>            
+            <div class="input-group">
+                <button type="submit">Tìm Kiếm</button>
+            </div>
+        </form>
+        <div id="search-results">
+        </div>
+    </div>
+    <script src="opponent.js"></script>
+</body>
+
+<footer>
+    <p>&copy; iNTV | VN2</p>
+</footer>
+</html>

@@ -23,6 +23,15 @@ h1 {
     margin-bottom: -5px;
 }
 
+h2 {
+    text-align: center;
+    font-size: 20px;
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 5px;
+    margin-top: 2px;
+}
+
 
 .options {
     text-align: center;
@@ -236,6 +245,10 @@ body.dark-mode .container {
 }
 
 body.dark-mode h1 {
+    color: #f0f0f0; /* Màu chữ sáng hơn cho dark mode */
+}
+
+body.dark-mode h2 {
     color: #f0f0f0; /* Màu chữ sáng hơn cho dark mode */
 }
 
